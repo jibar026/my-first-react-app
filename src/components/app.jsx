@@ -22,7 +22,7 @@ class App extends Component {
           <main className="terminal px-3 text-left">
             <h1>
               {" "}
-              VM Host: <span className="ip-text">{this.state.server_ip}</span>
+              VM IP: <span className="ip-text">{this.state.server_ip}</span>
             </h1>
             <p>Remote Port: {this.state.remote_port}</p>
             <p>Server Protocol: {this.state.server_protocol}</p>
