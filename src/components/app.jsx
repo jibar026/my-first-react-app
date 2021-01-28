@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import Navbar from "./navbar";
+import axios from 'axios'
+
 
 class App extends Component {
   state = {
-    server_ip: window.location.host,
+    server_ip: window.location.hostname,
     remote_port: window.location.port,
     server_protocol: window.location.protocol,
-    server_host: window.location.hostname,
+    server_host: window.location.host,
     user_agent: window.navigator.userAgent,
     seconds: 0,
   };
@@ -60,6 +62,24 @@ class App extends Component {
   
   componentWillUnmount() {
     clearInterval(this.interval);
+  }
+
+  getServerMetaData(){
+      axios.get('http://169.254.169.254/latest/meta-data/local-ipv4')
+      .then(function (response) {
+        console.log(response);
+        this.setState(state => ({
+          server_ip : response
+        })); 
+        console.log(response);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+    });
   }
 }
 export default App;
